@@ -28,6 +28,7 @@ app.get('/', (req, res) => {
   db.collection('messages').find().toArray((err, result) => {
     if (err) return console.log(err)
     res.render('index.ejs', {messages: result})
+    // console.log(result);
   })
 })
 
@@ -40,10 +41,25 @@ app.post('/messages', (req, res) => {
 })
 
 app.put('/messages', (req, res) => {
+  console.log("messagesUp");
   db.collection('messages')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {
       thumbUp:req.body.thumbUp + 1
+    }
+  }, {
+    sort: {_id: -1},
+    upsert: true
+  }, (err, result) => {
+    if (err) return res.send(err)
+    res.send(result)
+  })
+})
+app.put('/messagesDown', (req, res) => {
+  db.collection('messages')
+  .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
+    $set: {
+      thumbDown:req.body.thumbDown + 1
     }
   }, {
     sort: {_id: -1},
