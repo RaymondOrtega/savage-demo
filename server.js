@@ -5,10 +5,10 @@ const MongoClient = require('mongodb').MongoClient
 
 var db, collection;
 
-const url = "mongodb+srv://demo:demo@cluster0-q2ojb.mongodb.net/test?retryWrites=true";
-const dbName = "demo";
+const url = "mongodb+srv://raymond:raymond@cluster0-jzq0w.mongodb.net/test?retryWrites=true&w=majority";
+const dbName = "savageDemo";
 
-app.listen(3000, () => {
+app.listen(4000, () => {
     MongoClient.connect(url, { useNewUrlParser: true }, (error, client) => {
         if(error) {
             throw error;
@@ -23,17 +23,24 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
+// app.get('/', (req, res) => {
+//   //console.log(db)
+//   db.collection('work').find().toArray((err, result) => {
+//     if (err) return console.log(err)
+//     res.render('index.ejs', {messages: result})
+//     // console.log(result);
+//   })
+// })
 app.get('/', (req, res) => {
-  //console.log(db)
-  db.collection('messages').find().toArray((err, result) => {
-    if (err) return console.log(err)
-    res.render('index.ejs', {messages: result})
-    // console.log(result);
-  })
+ //console.log(db)
+ db.collection('work').find().toArray((err, result) => {
+   if (err) return console.log(err)
+   res.render('index.ejs', {messages: result})
+ })
 })
 
 app.post('/messages', (req, res) => {
-  db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+  db.collection('work').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
     res.redirect('/')
@@ -42,7 +49,7 @@ app.post('/messages', (req, res) => {
 
 app.put('/messages', (req, res) => {
   console.log("messagesUp");
-  db.collection('messages')
+  db.collection('work')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {
       thumbUp:req.body.thumbUp + 1
@@ -56,7 +63,7 @@ app.put('/messages', (req, res) => {
   })
 })
 app.put('/messagesDown', (req, res) => {
-  db.collection('messages')
+  db.collection('work')
   .findOneAndUpdate({name: req.body.name, msg: req.body.msg}, {
     $set: {
       thumbDown:req.body.thumbDown + 1
@@ -71,7 +78,7 @@ app.put('/messagesDown', (req, res) => {
 })
 
 app.delete('/messages', (req, res) => {
-  db.collection('messages').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
+  db.collection('work').findOneAndDelete({name: req.body.name, msg: req.body.msg}, (err, result) => {
     if (err) return res.send(500, err)
     res.send('Message deleted!')
   })

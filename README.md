@@ -1,11 +1,9 @@
-![21 Savage](public/21savage.jpg)
+# Bootcamp2019a Project: Complete the thumbs down feature of messages posted by users. Data must be saved in a database.
 
-## Installation
+![alt tag](homePage.jpg)
 
-1. Clone repo
-2. run `npm install`
+### lessons learned:
+```
+This was especially difficult for me because it was my first time working with MogoDb and utilizing express methods. However this is where i began to understand the connections of all these methods and working with the database. 
 
-## Usage
-
-1. run `npm run savage`
-2. Navigate to `localhost:3000`
+```

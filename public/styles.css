@@ -1,4 +1,12 @@
-
+*{
+  text-align: center;
+}
+body{
+  background-image: url(savage.jpg);
+}
+ul{
+  list-style: none;
+}
 h3{
   margin-top: 40px;
 }
