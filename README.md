@@ -1,6 +1,6 @@
 # Bootcamp2019a Project: Complete the thumbs down feature of messages posted by users. Data must be saved in a database.
 
-![alt tag](/Users/resilientcoders14/Documents/savage-demo/index.html)
+![alt tag](/public/homePage.png)
 
 ### lessons learned:
 ```
